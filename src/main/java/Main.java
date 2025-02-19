@@ -1,4 +1,5 @@
 import dao.StudentCRUDOperations;
+import entity.Criteria;
 import entity.Sex;
 import entity.Student;
 
@@ -14,6 +15,7 @@ public class Main {
 //        studentCRUDOperations.saveAll(List.of(mahery));
 //        studentCRUDOperations.update(1,newMitantsoa);
 //        studentCRUDOperations.delete(2);
-        System.out.println(studentCRUDOperations.findAll(2,2));
+        Criteria criteria = new Criteria("name", "Mahery");
+        System.out.println(studentCRUDOperations.findByCriteria(criteria));
     }
 }
