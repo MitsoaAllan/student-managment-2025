@@ -113,11 +113,12 @@ public class StudentCRUDOperations implements CRUDOperations<Student> {
     }
 
     @Override
-    public List<Student> findByCriteria(Criteria criteria){
+    public List<Student> findByCriteria(List<Criteria> criterias,int page, int size) {
         ArrayList<Student> students = new ArrayList<>();
         StringBuilder sql = new StringBuilder("SELECT * FROM student WHERE 1=1");
         try(Connection conn =datasource.getConnection();
             Statement st = conn.createStatement()){
+            criterias.forEach(criteria -> {
                 switch (criteria.getColumn()){
                     case "name":
                         sql.append(" AND name LIKE ('%");
@@ -136,6 +137,28 @@ public class StudentCRUDOperations implements CRUDOperations<Student> {
                     default:
                         throw new AssertionError("Unsupported criteria column");
                 }
+            });
+
+            criterias.forEach(criteria -> {
+                if(criteria.getOrderBy()!=null){
+                    switch (criteria.getOrderBy()){
+                        case "name":
+                            sql.append(" ORDER BY name");
+                            break;
+                        case "birthdate":
+                            sql.append(" ORDER BY birthdate");
+                            break;
+                        default:
+                            throw new AssertionError("Unsupported orderBy column");
+                    }
+                    if(!criteria.isAsc()){
+                        sql.append(" DESC");
+                    }else{
+                        sql.append(" ASC");
+                    }
+                }
+                sql.append(" LIMIT ");sql.append(size);sql.append(" OFFSET ");sql.append((page-1)*size);
+            });
                 ResultSet rs = st.executeQuery(sql.toString());
                 while (rs.next()){
                     Student student = new Student();

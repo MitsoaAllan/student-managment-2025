@@ -10,5 +10,5 @@ public interface CRUDOperations<E> {
     List<E> saveAll(List<E> entityList);
     E update(int id,E entity);
     void delete(int id);
-    List<E> findByCriteria(Criteria criteria);
+    List<E> findByCriteria(List<Criteria> criteria,int page, int size);
 }
