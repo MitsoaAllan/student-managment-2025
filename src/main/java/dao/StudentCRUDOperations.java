@@ -129,8 +129,9 @@ public class StudentCRUDOperations implements CRUDOperations<Student> {
                         sql.append(criteria.getValue());
                         break;
                     case "sex":
-                        sql.append("AND sex=");
-                        sql.append(criteria.getValue());
+                        sql.append(" AND sex='");
+                        sql.append(Sex.valueOf(criteria.getValue()));
+                        sql.append("'");
                         break;
                     default:
                         throw new AssertionError("Unsupported criteria column");

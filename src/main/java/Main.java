@@ -15,7 +15,7 @@ public class Main {
 //        studentCRUDOperations.saveAll(List.of(mahery));
 //        studentCRUDOperations.update(1,newMitantsoa);
 //        studentCRUDOperations.delete(2);
-        Criteria criteria = new Criteria("name", "Mahery");
+        Criteria criteria = new Criteria("sex", "MALE");
         System.out.println(studentCRUDOperations.findByCriteria(criteria));
     }
 }
