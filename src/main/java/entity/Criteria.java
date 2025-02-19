@@ -17,31 +17,15 @@ public class Criteria {
         return asc;
     }
 
-    public void setAsc(boolean asc) {
-        this.asc = asc;
-    }
-
     public String getOrderBy() {
         return orderBy;
-    }
-
-    public void setOrderBy(String orderBy) {
-        this.orderBy = orderBy;
     }
 
     public String getColumn() {
         return column;
     }
 
-    public void setColumn(String column) {
-        this.column = column;
-    }
-
     public String getValue() {
         return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
     }
 }
